@@ -61,7 +61,7 @@ El despliegue de la aplicación se realiza de forma desatendida mediante el scri
 
 ### Screencast con la aplicación desplegada
 A continuación se muestra la grabación de pantalla que demuestra el correcto funcionamiento de la aplicación web interactuando con la base de datos:
-
+https://github.com/user-attachments/assets/274c4069-96b2-4eb6-ac14-4cd3ef474051
 ##  Scripts de Aprovisionamiento Explicados
 
 A continuación se desglosan los comandos utilizados en la automatización junto con la explicación detallada de cada orden.
