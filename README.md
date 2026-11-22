@@ -13,6 +13,18 @@ Este documento detalla la infraestructura basada en **Debian 12 (Bookworm)** y *
 
 ---
 
+## 2. Proceso de Instalación de PrestaShop 9.2.1
+
+El despliegue de la aplicación se realiza de forma desatendida mediante el script `pprestashop.sh` en las siguientes fases:
+
+1. **Preparación del Entorno (PHP 8.2, Composer y Node.js):** Instalación de las extensiones requeridas por PrestaShop (`curl`, `gd`, `intl`, `mbstring`, `xml`, `zip`, `bcmath`, `imagick`, `mysql`), gestor de dependencias Composer y Node.js 24 LTS. Ajuste de directivas en `php.ini` (`memory_limit = 512M`, `max_input_vars = 5000`).
+2. **Configuración de Apache y SSL tras Proxy:** Habilitación de `mod_rewrite`, activación de archivos `.htaccess` (`AllowOverride All`) y configuración de `SetEnvIf X-Forwarded-Proto "https" HTTPS=on` para que PrestaShop reconozca el tráfico cifrado proveniente del balanceador.
+3. **Descarga y Compilación de Código Fuente (Nodo `apache1`):** Descarga de PrestaShop 9.2.1 desde GitHub, instalación de librerías PHP con `composer install` y compilación de activos estáticos (CSS/JS) de temas y módulos mediante `npm run build`.
+4. **Instalación Desatendida (CLI):** Ejecución de `install-dev/index_cli.php` conectando con la base de datos `prestashop_db` en la Capa 3 (`192.168.20.20`), configurando el dominio HTTPS (`franbalanceador.duckdns.org`), idioma español y credenciales de administración.
+5. **Post-instalación, Seguridad y phpMyAdmin:** Aplicación de parche en traducciones `es-ES` para PHP 8.2, eliminación del instalador (`install-dev`), renombrado del panel de administración (`admin_tienda`) y despliegue de **phpMyAdmin** apuntando al servidor MariaDB.
+6. **Sincronización del Clúster (Nodo `apache2`) y Aislamiento:** Empaquetado de la instalación completa en `/vagrant/ps_instalado.tar.gz` para replicarla de forma idéntica en `apache2` y eliminación de la puerta de enlace por defecto para aislar los servidores web de Internet.
+
+
 ## Índice
 
 - [Verificación del Sistema (Capturas de Pantalla)](#verificación-del-sistema-capturas-de-pantalla)
