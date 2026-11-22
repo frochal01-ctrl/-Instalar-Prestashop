@@ -316,7 +316,7 @@ apt-get install -y ca-certificates curl gnupg unzip git composer \
   php8.2-curl php8.2-gd php8.2-intl php8.2-mbstring php8.2-xml php8.2-zip php8.2-bcmath php8.2-imagick php8.2-mysql
 
 # Descarga y configura el repositorio oficial de NodeSource para Node.js 24.
-curl -fsSL https://nodesource.com | bash -
+curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 # Instala Node.js y el gestor de paquetes npm.
 apt-get install -y nodejs
 
@@ -351,7 +351,7 @@ if [ "$1" = "instalar" ]; then
   # Borra descargas o carpetas anteriores de PrestaShop si existen.
   rm -rf 9.2.1.zip PrestaShop-9.2.1
   # Descarga el archivo ZIP con el código fuente de PrestaShop 9.2.1 desde GitHub.
-  curl -fL -o 9.2.1.zip https://github.com
+  curl -fL -o 9.2.1.zip https://github.com/PrestaShop/PrestaShop/archive/refs/tags/9.2.1.zip
   # Descomprime el archivo descargado en modo silencioso.
   unzip -q 9.2.1.zip
 
@@ -419,7 +419,7 @@ if [ "$1" = "instalar" ]; then
   # Se desplaza al directorio temporal para descargar phpMyAdmin.
   cd /tmp
   # Descarga la última versión multilenguaje de phpMyAdmin.
-  curl -fsSL -o phpMyAdmin.tar.gz https://phpmyadmin.net
+   curl -fsSL -o phpMyAdmin.tar.gz https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
   # Crea el directorio destino para phpMyAdmin dentro de la web.
   mkdir -p /var/www/html/phpmyadmin
   # Extrae el contenido de phpMyAdmin eliminando la carpeta raíz del archivo comprimido.
